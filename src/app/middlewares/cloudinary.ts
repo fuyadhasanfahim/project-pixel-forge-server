@@ -12,17 +12,15 @@ cloudinary.v2.config({
 const storage = new CloudinaryStorage({
     cloudinary: cloudinary.v2,
     params: async (req, file) => {
-        const { username, services } = req.body
-
-        const folderName = Array.isArray(services)
-            ? services
-            : JSON.parse(services || '[]')
+        const { username } = req.body
 
         const timestampFolder = moment().format('DD-MM-YYYY')
+        const hourFolder = moment().format('HH')
 
         return {
-            folder: `${username}/${timestampFolder}/${folderName}`,
+            folder: `${username}/${timestampFolder}/${hourFolder}`,
             public_id: `${file.originalname}`,
+            resource_type: 'auto',
         }
     },
 })

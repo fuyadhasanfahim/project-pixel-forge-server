@@ -3,7 +3,7 @@ interface IOrders {
     username: string
     services: string[]
     complexities: Record<string, string>
-    additionalInstructions: string
+    instructions: string
     outputFormat: string
     deliveryDate: string
     status:
@@ -17,6 +17,7 @@ interface IOrders {
     paymentStatus: 'pending' | 'paid'
     folderUrl: string
     images: string
+    imageUrls: string[]
 }
 
 export default IOrders

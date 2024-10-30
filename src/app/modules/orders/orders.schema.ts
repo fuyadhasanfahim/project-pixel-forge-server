@@ -22,7 +22,7 @@ const OrdersSchema = new Schema<IOrders>(
             of: String,
             required: true,
         },
-        additionalInstructions: {
+        instructions: {
             type: String,
             required: false,
         },
@@ -59,6 +59,10 @@ const OrdersSchema = new Schema<IOrders>(
         images: {
             type: String,
             required: true,
+        },
+        imageUrls: {
+            type: [String],
+            optional: true,
         },
     },
     { timestamps: true },

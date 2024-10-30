@@ -4,10 +4,10 @@ import httpStatus from 'http-status'
 import moment from 'moment'
 
 const uploadFiles: RequestHandler = async (req, res) => {
-    const { username, services } = req.body
+    const { username } = req.body
     const files = req.files as Express.Multer.File[]
 
-    if (!username || !services || !files || !files.length) {
+    if (!username || !files || !files.length) {
         res.status(httpStatus.BAD_REQUEST).json({
             success: false,
             message: 'Every input is required.',
@@ -15,13 +15,17 @@ const uploadFiles: RequestHandler = async (req, res) => {
     }
 
     try {
-        const timestampFolder = moment().format('DD-MM-YYYY')
+        const timestampFolder = moment().format('DD-MM-YYYY/HH')
+
         const folderUrl = `https://console.cloudinary.com/console/c-e325ade2a2814f45f2f14be14f2f9d/media_library/folders/${username}/${timestampFolder}?view_mode=mosaic`
+
+        const imageUrls = files.map((file) => file.path)
 
         res.status(httpStatus.OK).json({
             success: true,
             message: 'Files uploaded successfully',
             folderUrl,
+            imageUrls,
         })
     } catch (error) {
         res.status(httpStatus.INTERNAL_SERVER_ERROR).json({
