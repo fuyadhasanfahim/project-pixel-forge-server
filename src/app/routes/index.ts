@@ -3,6 +3,7 @@ import { UserRoutes } from '../modules/users/user.routes'
 import { OrdersRoutes } from '../modules/orders/orders.routes'
 import { MessageRouter } from '../modules/message/message.route'
 import { ExpenseRouter } from '../modules/expense/expense.routes'
+import { CustomerRoutes } from '../modules/customer/customer.route'
 
 const router = Router()
 
@@ -22,6 +23,10 @@ const moduleRoutes = [
     {
         path: '/expenses',
         route: ExpenseRouter,
+    },
+    {
+        path: '/customers',
+        route: CustomerRoutes,
     },
 ]
 
