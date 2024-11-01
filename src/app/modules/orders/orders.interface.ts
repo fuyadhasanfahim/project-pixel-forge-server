@@ -24,6 +24,7 @@ interface IOrders {
     images: string
     totalBudget?: string
     totalPrice?: string
+    customerId: string
 }
 
 export default IOrders

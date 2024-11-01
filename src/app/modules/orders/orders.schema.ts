@@ -91,6 +91,10 @@ const OrdersSchema = new Schema<IOrders>(
             type: String,
             required: false,
         },
+        customerId: {
+            type: String,
+            required: false,
+        },
     },
     { timestamps: true },
 )
