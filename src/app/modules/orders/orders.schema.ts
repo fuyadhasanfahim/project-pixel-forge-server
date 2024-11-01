@@ -13,6 +13,21 @@ const OrdersSchema = new Schema<IOrders>(
             ref: 'User',
             required: true,
         },
+        name: {
+            type: String,
+            ref: 'User',
+            required: true,
+        },
+        email: {
+            type: String,
+            ref: 'User',
+            required: true,
+        },
+        profileImage: {
+            type: String,
+            ref: 'User',
+            required: true,
+        },
         services: {
             type: [String],
             required: true,
@@ -54,15 +69,27 @@ const OrdersSchema = new Schema<IOrders>(
         },
         folderUrl: {
             type: String,
+            required: false,
+        },
+        imagesLink: {
+            type: String,
             required: true,
         },
         images: {
             type: String,
             required: true,
         },
-        imageUrls: {
-            type: [String],
-            optional: true,
+        pricePerImage: {
+            type: String,
+            required: false,
+        },
+        totalBudget: {
+            type: String,
+            required: false,
+        },
+        totalPrice: {
+            type: String,
+            required: false,
         },
     },
     { timestamps: true },

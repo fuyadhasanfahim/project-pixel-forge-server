@@ -7,25 +7,21 @@ const uploadFiles: RequestHandler = async (req, res) => {
     const { username } = req.body
     const files = req.files as Express.Multer.File[]
 
-    if (!username || !files || !files.length) {
+    if (!username || !files?.length) {
         res.status(httpStatus.BAD_REQUEST).json({
             success: false,
-            message: 'Every input is required.',
+            message: 'Username and files are required for upload.',
         })
     }
 
     try {
         const timestampFolder = moment().format('DD-MM-YYYY/HH')
-
         const folderUrl = `https://console.cloudinary.com/console/c-e325ade2a2814f45f2f14be14f2f9d/media_library/folders/${username}/${timestampFolder}?view_mode=mosaic`
-
-        const imageUrls = files.map((file) => file.path)
 
         res.status(httpStatus.OK).json({
             success: true,
             message: 'Files uploaded successfully',
             folderUrl,
-            imageUrls,
         })
     } catch (error) {
         res.status(httpStatus.INTERNAL_SERVER_ERROR).json({

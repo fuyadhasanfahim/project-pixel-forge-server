@@ -1,6 +1,9 @@
 interface IOrders {
     userId: string
     username: string
+    name: string
+    email: string
+    profileImage: string
     services: string[]
     complexities: Record<string, string>
     instructions: string
@@ -15,9 +18,12 @@ interface IOrders {
         | 'canceled'
         | 'request for additional information'
     paymentStatus: 'pending' | 'paid'
-    folderUrl: string
+    folderUrl?: string
+    imagesLink: string
+    pricePerImage?: string
     images: string
-    imageUrls: string[]
+    totalBudget?: string
+    totalPrice?: string
 }
 
 export default IOrders
