@@ -143,7 +143,8 @@ const loginUser: RequestHandler = async (req, res) => {
 
 const getCurrentUser: RequestHandler = async (req, res) => {
     try {
-        const token = req.cookies.accessToken
+        const token =
+            req.cookies.accessToken || req.headers.authorization?.split(' ')[1]
         if (!token) throw new Error('Access token not found')
 
         const decoded = jwt.verify(token, config.jwt_secret as string) as {
