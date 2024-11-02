@@ -30,7 +30,17 @@ const getCustomersFromDB = async () => {
     }
 }
 
+const getCustomerByCustomerIdFromDB = async (customerId: string) => {
+    try {
+        const customer = await CustomerModel.find({ customerId })
+        return customer
+    } catch (error) {
+        throw new Error((error as Error).message)
+    }
+}
+
 export const CustomerServices = {
     createCustomerIntoDB,
     getCustomersFromDB,
+    getCustomerByCustomerIdFromDB,
 }

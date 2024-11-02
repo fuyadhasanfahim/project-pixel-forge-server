@@ -46,7 +46,36 @@ const getCustomers: RequestHandler = async (req, res) => {
     }
 }
 
+const getCustomer: RequestHandler = async (req, res) => {
+    const { customerId } = req.params
+
+    if (!customerId) {
+        res.status(400).json({
+            success: false,
+            message: 'Customer ID is required',
+        })
+    }
+
+    try {
+        const customer =
+            await CustomerServices.getCustomerByCustomerIdFromDB(customerId)
+
+        res.status(httpStatus.OK).json({
+            success: true,
+            message: 'Customers retrieved successfully',
+            customer,
+        })
+    } catch (error) {
+        res.status(httpStatus.INTERNAL_SERVER_ERROR).json({
+            success: false,
+            message: (error as Error).message,
+            error,
+        })
+    }
+}
+
 export const CustomerControllers = {
     createCustomer,
     getCustomers,
+    getCustomer,
 }

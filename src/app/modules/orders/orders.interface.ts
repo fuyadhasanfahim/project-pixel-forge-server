@@ -1,4 +1,5 @@
 interface IOrders {
+    invoiceNumber: string
     userId: string
     username: string
     name: string
@@ -25,6 +26,7 @@ interface IOrders {
     totalBudget?: string
     totalPrice?: string
     customerId: string
+    orderName?: string
 }
 
 export default IOrders

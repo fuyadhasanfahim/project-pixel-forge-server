@@ -3,6 +3,11 @@ import IOrders from './orders.interface'
 
 const OrdersSchema = new Schema<IOrders>(
     {
+        invoiceNumber: {
+            type: String,
+            required: true,
+            unique: true,
+        },
         userId: {
             type: String,
             ref: 'User',
@@ -92,6 +97,10 @@ const OrdersSchema = new Schema<IOrders>(
             required: false,
         },
         customerId: {
+            type: String,
+            required: false,
+        },
+        orderName: {
             type: String,
             required: false,
         },
