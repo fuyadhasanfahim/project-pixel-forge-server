@@ -46,10 +46,11 @@ const UserSchema = new Schema<IUser>(
                 'user',
                 'admin',
                 'superAdmin',
-                'team-manager',
+                'teamManager',
                 'accountant',
-                'team-leader',
+                'teamLeader',
             ],
+            required: false,
             default: 'user',
         },
         isActive: {

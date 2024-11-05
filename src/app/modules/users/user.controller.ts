@@ -8,8 +8,16 @@ import { sendVerificationEmail } from '../../utils/emailService'
 
 const createUser: RequestHandler = async (req, res) => {
     try {
-        const { name, username, email, password, country, phone, company } =
-            req.body
+        const {
+            name,
+            username,
+            email,
+            password,
+            country,
+            phone,
+            company,
+            role,
+        } = req.body
 
         if (
             !name ||
@@ -18,7 +26,8 @@ const createUser: RequestHandler = async (req, res) => {
             !password ||
             !country ||
             !phone ||
-            !company
+            !company ||
+            !role
         ) {
             res.status(status.BAD_REQUEST).json({
                 success: false,
@@ -34,6 +43,7 @@ const createUser: RequestHandler = async (req, res) => {
             country,
             phone,
             company,
+            role,
         }
         const user = await UserService.createUserIntoDB(data)
 
@@ -217,10 +227,29 @@ const verifyEmail: RequestHandler = async (req, res) => {
     }
 }
 
+const getAllUsers: RequestHandler = async (req, res) => {
+    try {
+        const users = await UserService.getAllUsers()
+
+        res.status(status.OK).json({
+            success: true,
+            message: 'Users are retrieved successfully!',
+            users,
+        })
+    } catch (error) {
+        res.status(status.UNAUTHORIZED).json({
+            success: false,
+            message: (error as Error).message,
+            error,
+        })
+    }
+}
+
 export const UserController = {
     createUser,
     loginUser,
     getCurrentUser,
     getUserByUserID,
     verifyEmail,
+    getAllUsers,
 }

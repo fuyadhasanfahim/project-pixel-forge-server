@@ -8,5 +8,6 @@ router.post('/auth/login', UserController.loginUser)
 router.get('/auth/get-current-user', UserController.getCurrentUser)
 router.get('/auth/get-user-by-id/:userId', UserController.getUserByUserID)
 router.get('/auth/verify-email', UserController.verifyEmail)
+router.get('/get-all-users', UserController.getAllUsers)
 
 export const UserRoutes = router

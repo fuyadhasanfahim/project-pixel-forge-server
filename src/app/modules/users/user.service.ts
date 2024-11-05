@@ -12,6 +12,7 @@ interface CreateUserProps {
     company: string
     country: string
     phone: string
+    role?: string
 }
 
 const createUserIntoDB = async ({
@@ -22,6 +23,7 @@ const createUserIntoDB = async ({
     company,
     country,
     phone,
+    role,
 }: CreateUserProps) => {
     const existingUser = await UserModel.findOne({
         $or: [{ email }, { username }, { phone }],
@@ -49,6 +51,7 @@ const createUserIntoDB = async ({
         phone,
         company,
         country,
+        role,
         password: hashedPassword,
     })
 
@@ -99,9 +102,19 @@ const getUserById = async (id: string) => {
     return user
 }
 
+const getAllUsers = async () => {
+    try {
+        const users = await UserModel.find()
+        return users
+    } catch {
+        throw new Error('Users not found')
+    }
+}
+
 export const UserService = {
     createUserIntoDB,
     loginUserFromDB,
     getCurrentUserFromDB,
     getUserById,
+    getAllUsers,
 }
