@@ -149,6 +149,38 @@ const updateOrderById: RequestHandler = async (req, res) => {
     }
 }
 
+const getAllOrderByCustomerId: RequestHandler = async (req, res) => {
+    const { customerId } = req.params
+
+    if (!customerId) {
+        res.status(400).json({
+            success: false,
+            message: 'Customer ID is required',
+        })
+    }
+
+    try {
+        const orders =
+            await OrdersServices.getOrdersByCustomerIdFromDB(customerId)
+
+        if (!orders || orders.length === 0) {
+            throw new Error('Order not found.')
+        }
+
+        res.status(httpStatus.OK).json({
+            success: true,
+            message: 'Orders are retrieved successfully',
+            orders,
+        })
+    } catch (error) {
+        res.status(httpStatus.INTERNAL_SERVER_ERROR).json({
+            success: false,
+            message: (error as Error).message,
+            error,
+        })
+    }
+}
+
 export const OrdersController = {
     uploadFiles,
     createOrders,
@@ -156,4 +188,5 @@ export const OrdersController = {
     getOrderByOrderId,
     getAllOrders,
     updateOrderById,
+    getAllOrderByCustomerId,
 }

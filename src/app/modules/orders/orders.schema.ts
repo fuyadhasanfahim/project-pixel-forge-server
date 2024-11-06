@@ -88,10 +88,6 @@ const OrdersSchema = new Schema<IOrders>(
             type: String,
             required: false,
         },
-        totalBudget: {
-            type: String,
-            required: false,
-        },
         totalPrice: {
             type: String,
             required: false,

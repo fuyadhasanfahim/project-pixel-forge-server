@@ -23,7 +23,6 @@ interface IOrders {
     imagesLink: string
     pricePerImage?: string
     images: string
-    totalBudget?: string
     totalPrice?: string
     customerId: string
     orderName?: string
